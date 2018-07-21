@@ -3,6 +3,7 @@ import morgon from 'morgan'
 import path from 'path'
 import fs from 'fs'
 import rfs from 'rotating-file-stream'
+import controller from './controller'
 
 const app = express()
 const homeRoute = express.Router()
@@ -25,6 +26,8 @@ app.use('/',homeRoute)
 homeRoute.get('/',(req,res)=>{
     res.status(200).json({message: 'Welcome Animal Pets API Endpoints'})
 })
+
+controller(api)
 
 app.listen(serverPort,()=>{
     console.log('Animal Pets API server started!!')
