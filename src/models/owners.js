@@ -37,6 +37,13 @@ const findOwnerByEmail=(email)=>{
     return owner
 }
 
+const findOwnerById=(id)=>{
+    const owners = getAllOwners()
+    const owner = owners.filter(owner=> owner.id == id).shift()
+    return owner
+}
+
 exports.initOwnersData=initOwnersData
 exports.getAllOwners=getAllOwners
 exports.findOwnerByEmail=findOwnerByEmail
+exports.findOwnerById=findOwnerById

@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import morgon from 'morgan'
 import path from 'path'
 import fs from 'fs'
@@ -20,6 +21,7 @@ const accessLogStream = rfs('access.log',{
     compress: 'gzip'
 })
 
+app.use(bodyParser.json({limit: '200mb'}))
 app.use(morgon('combined',{stream: accessLogStream}))
 app.use('/api',api)
 app.use('/',homeRoute)
