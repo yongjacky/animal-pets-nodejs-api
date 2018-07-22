@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import rfs from 'rotating-file-stream'
 import controller from './controller'
+import { initData } from './services/dataHandler'
 
 const app = express()
 const homeRoute = express.Router()
@@ -28,6 +29,8 @@ homeRoute.get('/',(req,res)=>{
 })
 
 controller(api)
+
+initData()
 
 app.listen(serverPort,()=>{
     console.log('Animal Pets API server started!!')

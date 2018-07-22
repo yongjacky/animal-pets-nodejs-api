@@ -1,7 +1,12 @@
+import { getAllOwnersApi,getOwnerByEmail } from './services/dataHandler'
 
 const controller=(router)=>{
     router.get('/owners',(req,res)=>{
-        return res.status(200).json({message: 'Hello 3'})
+        return getAllOwnersApi(req,res)
+    })
+
+    router.get('/owners/:email',(req,res)=>{
+        return getOwnerByEmail(req,res)
     })
 }
 
