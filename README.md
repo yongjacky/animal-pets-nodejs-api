@@ -14,7 +14,7 @@ npm install
 #### Start local development
 This command serves the app at http://localhost:3000
 ```
-npm run dev
+npm start
 ```
 
 ## Docker
