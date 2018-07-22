@@ -19,6 +19,11 @@ const postNewPet=async (req,res)=>{
     const id = req.params.id //owner id
     const payload = req.body;
     
+    const anyError = await petsModel.validatePayload(payload)
+    if (anyError) {
+        return res.status(422).json(anyError)
+    }
+    
     await petsModel.addNewPet(id,payload)
 
     return res.status(200).json({message: 'New pet has been created for this owner'})

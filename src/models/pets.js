@@ -42,23 +42,31 @@ const findPet=(ownerId,petId)=>{
     return pet
 }
 
+const validatePayload=(pet)=>{
+    if (!isValueValid(pet['name'])){
+        return {error: `Name is required!`}
+    }else if (!isValueValid(pet['colour'])){
+        return {error: `Colour is required!`}
+    }else if (!isValueValid(pet['age'])){
+        return {error: `Age is required!`}
+    }else if (!isValueValid(pet['breed'])){
+        return {error: `Breed is required!`}
+    }else if (!isValueValid(pet['type'])){
+        return {error: `Type [Cat or Dog] is required!`}
+    }
+}
+
 const validateUpdatePet=(ownerId,petId,modifiedPet)=>{
     if (!findOwnerById(ownerId)){
         return {error: 'Invalid Owner Id!'}
     }else if (!findPet(ownerId,petId)){
         return {error: 'Invalid Pet Id!'}
-    }else if (!isValueValid(modifiedPet['name'])){
-        return {error: `Name is required!`}
-    }else if (!isValueValid(modifiedPet['colour'])){
-        return {error: `Colour is required!`}
-    }else if (!isValueValid(modifiedPet['age'])){
-        return {error: `Age is required!`}
-    }else if (!isValueValid(modifiedPet['breed'])){
-        return {error: `Breed is required!`}
-    }else if (!isValueValid(modifiedPet['type'])){
-        return {error: `Type [Cat or Dog] is required!`}
+    }else {
+        const notValid = validatePayload(modifiedPet)
+        if (notValid){
+            return notValid
+        }
     }
-   
     return null
 }
 
@@ -67,3 +75,4 @@ exports.getPetsByOwner=getPetsByOwner
 exports.updatePet=updatePet
 exports.findPet=findPet
 exports.validateUpdatePet=validateUpdatePet
+exports.validatePayload=validatePayload
